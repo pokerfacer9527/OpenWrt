@@ -38,7 +38,9 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-timecontrol package/luc
 git clone --depth=1 https://github.com/sirpdboy/luci-app-netspeedtest package/luci-app-netspeedtest
 git clone --depth=1 https://github.com/sirpdboy/luci-app-parentcontrol package/luci-app-parentcontrol
 git clone --depth=1 https://github.com/frainzy1477/luci-app-clash.git package/luci-app-clash
-git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
+#git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
+git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git package/lua-maxminddb
+git clone --depth=1 https://github.com/QiuSimons/luci-app-vssr-jerrykuku package/luci-app-vssr
 git clone --depth=1 https://github.com/kingyond/luci-app-accesscontrol-plus package/luci-app-accesscontrol-plus
 git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
@@ -52,7 +54,7 @@ git_sparse_clone openwrt-18.06 https://github.com/immortalwrt/luci applications/
 
 # 科学上网插件
 #git clone --depth=1 -b main https://github.com/fw876/helloworld package/luci-app-ssr-plus
-git clone --depth=1 -b master https://github.com/fw876/helloworld package/luci-app-ssr-plus
+#git clone --depth=1 -b master https://github.com/fw876/helloworld package/luci-app-ssr-plus
 #git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
 git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
 #git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2 package/luci-app-passwall2
