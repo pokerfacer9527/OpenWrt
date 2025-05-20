@@ -42,6 +42,7 @@ git clone --depth=1 https://github.com/frainzy1477/luci-app-clash.git package/lu
 git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb.git package/lua-maxminddb
 git clone --depth=1 https://github.com/QiuSimons/luci-app-vssr-jerrykuku package/luci-app-vssr
 git clone --depth=1 https://github.com/kingyond/luci-app-accesscontrol-plus package/luci-app-accesscontrol-plus
+git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
 git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
 git clone --depth=1 https://github.com/ilxp/luci-app-ikoolproxy package/luci-app-ikoolproxy
