@@ -38,6 +38,7 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-partexp.git package/luc
 git clone --depth=1 https://github.com/sirpdboy/luci-app-netspeedtest package/luci-app-netspeedtest
 git clone --depth=1 https://github.com/sirpdboy/luci-app-parentcontrol package/luci-app-parentcontrol
 git clone --depth=1 https://github.com/frainzy1477/luci-app-clash.git package/luci-app-clash
+git clone --depth=1 https://github.com/haiibo/openwrt-packages package/luci-app-vssr
 #git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 git clone --depth=1 https://github.com/kingyond/luci-app-accesscontrol-plus package/luci-app-accesscontrol-plus
 git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
