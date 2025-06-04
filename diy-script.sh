@@ -31,7 +31,7 @@ function git_sparse_clone() {
 }
 
 # 添加额外插件
-git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/luci-app-OpenAppFilter
+#git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/luci-app-OpenAppFilter
 git clone --depth=1 https://github.com/sirpdboy/luci-app-eqosplus package/luci-app-eqosplus
 git clone --depth=1 https://github.com/sirpdboy/luci-app-partexp.git package/luci-app-partexp
 #git clone --depth=1 https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
