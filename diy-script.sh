@@ -20,6 +20,9 @@ rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/luci/applications/luci-app-netdata
 rm -rf feeds/luci/applications/luci-app-serverchan
 #rm -rf feeds/luci/applications/luci-app-oaf
+# OAF：feed 里的 open-app-filter 拉的是未适配 Linux 6.15+ 的旧源码（del_timer_sync 已改名），
+# 且与下面克隆的 OAF 重复定义 kmod-oaf / appfilter，会触发 kconfig 循环依赖 -> 先删掉
+rm -rf feeds/packages/net/open-app-filter
 
 # Git稀疏克隆，只克隆指定目录到本地
 function git_sparse_clone() {
@@ -32,7 +35,10 @@ function git_sparse_clone() {
 }
 
 # 添加额外插件
-git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/luci-app-OpenAppFilter
+# OAF：上游 destan19 未适配 Linux 6.15+（del_timer_sync 改名 timer_delete_sync），
+# 改用 QiuSimons/OpenWrt-Add 里已做版本条件编译的 OpenAppFilter（含 kmod-oaf + appfilter + luci-app-oaf）
+#git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/luci-app-OpenAppFilter
+git_sparse_clone master https://github.com/QiuSimons/OpenWrt-Add OpenAppFilter
 git clone --depth=1 https://github.com/sirpdboy/luci-app-eqosplus package/luci-app-eqosplus
 git clone --depth=1 https://github.com/sirpdboy/luci-app-partexp.git package/luci-app-partexp
 #git clone --depth=1 https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
@@ -45,7 +51,10 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git package/luc
 #git clone --depth=1 https://github.com/haiibo/openwrt-packages package/luci-app-vssr
 #git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 git clone --depth=1 https://github.com/afala2020/luci-app-accesscontrol package/luci-app-accesscontrol
-git clone --depth=1 https://github.com/bleach1991/openwrt-gecoosac package/openwrt-gecoosac
+# gecoosac：原二进制源 lwb1978/gecoosac-core 已删库（实测 404），
+# 改用把预编译二进制放在自己 Release 里的仓库（已核对 PKG_HASH 一致）
+#git clone --depth=1 https://github.com/bleach1991/openwrt-gecoosac package/openwrt-gecoosac
+git clone --depth=1 https://github.com/laipeng668/luci-app-gecoosac package/luci-app-gecoosac
 git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
 git clone --depth=1 https://github.com/ilxp/luci-app-ikoolproxy package/luci-app-ikoolproxy
