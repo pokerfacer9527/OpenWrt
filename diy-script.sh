@@ -32,11 +32,11 @@ function git_sparse_clone() {
 }
 
 # 添加额外插件
-#git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/luci-app-OpenAppFilter
+git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/luci-app-OpenAppFilter
 git clone --depth=1 https://github.com/sirpdboy/luci-app-eqosplus package/luci-app-eqosplus
 git clone --depth=1 https://github.com/sirpdboy/luci-app-partexp.git package/luci-app-partexp
 #git clone --depth=1 https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
-git clone --depth=1 https://github.com/sirpdboy/luci-app-netspeedtest package/luci-app-netspeedtest
+git clone --depth=1 https://github.com/sirpdboy/netspeedtest package/netspeedtest
 git clone --depth=1 https://github.com/sirpdboy/luci-app-parentcontrol package/luci-app-parentcontrol
 git clone --depth=1 https://github.com/frainzy1477/luci-app-clash.git package/luci-app-clash
 git clone --depth=1 https://github.com/sirpdboy/luci-app-taskplan package/luci-app-taskplan
@@ -45,7 +45,7 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git package/luc
 #git clone --depth=1 https://github.com/haiibo/openwrt-packages package/luci-app-vssr
 #git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 git clone --depth=1 https://github.com/kingyond/luci-app-accesscontrol-plus package/luci-app-accesscontrol-plus
-git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
+git clone --depth=1 https://github.com/bleach1991/openwrt-gecoosac package/openwrt-gecoosac
 git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
 git clone --depth=1 https://github.com/ilxp/luci-app-ikoolproxy package/luci-app-ikoolproxy
@@ -63,6 +63,12 @@ git_sparse_clone openwrt-18.06 https://github.com/immortalwrt/luci applications/
 #git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall package/luci-app-passwall
 #git clone --depth=1 https://github.com/xiaorouji/openwrt-passwall2 package/luci-app-passwall2
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
+
+# ===== 新增插件源 =====
+git clone --depth=1 https://github.com/kiddin9/luci-app-dnsfilter package/luci-app-dnsfilter
+git clone --depth=1 https://github.com/sirpdboy/luci-app-advanced package/luci-app-advanced
+git clone --depth=1 https://github.com/sirpdboy/luci-app-cupsd package/luci-app-cupsd
+git clone --depth=1 https://github.com/EasyTier/luci-app-easytier package/luci-app-easytier
 
 # Themes
 #git clone --depth=1 -b 18.06 https://github.com/kiddin9/luci-theme-edge package/luci-theme-edge
