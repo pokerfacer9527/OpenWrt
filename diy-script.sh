@@ -44,7 +44,7 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go.git package/luc
 
 #git clone --depth=1 https://github.com/haiibo/openwrt-packages package/luci-app-vssr
 #git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
-git clone --depth=1 https://github.com/kingyond/luci-app-accesscontrol-plus package/luci-app-accesscontrol-plus
+git clone --depth=1 https://github.com/afala2020/luci-app-accesscontrol package/luci-app-accesscontrol
 git clone --depth=1 https://github.com/bleach1991/openwrt-gecoosac package/openwrt-gecoosac
 git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 git clone --depth=1 -b openwrt-18.06 https://github.com/tty228/luci-app-wechatpush package/luci-app-serverchan
@@ -65,7 +65,6 @@ git_sparse_clone openwrt-18.06 https://github.com/immortalwrt/luci applications/
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 
 # ===== 新增插件源 =====
-git clone --depth=1 https://github.com/kiddin9/luci-app-dnsfilter package/luci-app-dnsfilter
 git clone --depth=1 https://github.com/sirpdboy/luci-app-advanced package/luci-app-advanced
 git clone --depth=1 https://github.com/sirpdboy/luci-app-cupsd package/luci-app-cupsd
 git clone --depth=1 https://github.com/EasyTier/luci-app-easytier package/luci-app-easytier
@@ -94,6 +93,18 @@ git clone --depth=1 https://github.com/EasyTier/luci-app-easytier package/luci-a
 #git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 #git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
+# ===== Passwall 官方源（Openwrt-Passwall 官方 Lean 安装流程）=====
+# 1) 移除 openwrt feeds 自带的核心库（否则与 passwall-packages 重名冲突）
+rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,v2ray-plugin,xray-plugin,geoview,shadow-tls,smartdns}
+# 2) Lean 把多数核心放在 helloworld feed，同样要清掉重名的
+for _p in xray-core v2ray-geodata sing-box chinadns-ng dns2socks hysteria ipt2socks microsocks naiveproxy shadowsocks-rust shadowsocksr-libev simple-obfs tcping v2ray-plugin xray-plugin geoview shadow-tls smartdns; do rm -rf feeds/helloworld/$_p; done
+# 3) 移除 feeds 里过时的 passwall luci 版本
+rm -rf feeds/luci/applications/luci-app-passwall feeds/luci/applications/luci-app-passwall2
+# 4) 克隆官方三仓库
+git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/passwall-packages
+git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-luci
+git clone --depth=1 -b main https://github.com/Openwrt-Passwall/openwrt-passwall2 package/passwall2-luci
+
 # MosDNS
 git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
@@ -109,7 +120,7 @@ git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
 git_sparse_clone main https://github.com/linkease/istore luci
 
 # 在线用户
-git_sparse_clone main https://github.com/haiibo/packages luci-app-onliner
+git clone --depth=1 https://github.com/selfcan/luci-app-onliner package/luci-app-onliner
 sed -i '$i uci set nlbwmon.@nlbwmon[0].refresh_interval=2s' package/lean/default-settings/files/zzz-default-settings
 sed -i '$i uci commit nlbwmon' package/lean/default-settings/files/zzz-default-settings
 chmod 755 package/luci-app-onliner/root/usr/share/onliner/setnlbw.sh
