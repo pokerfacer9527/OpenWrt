@@ -152,6 +152,12 @@ cp -f $GITHUB_WORKSPACE/script/011-fix-mbo-modules-build.patch package/network/s
 # 修复 armv8 设备 xfsprogs 报错
 sed -i 's/TARGET_CFLAGS.*/TARGET_CFLAGS += -DHAVE_MAP_SYNC -D_LARGEFILE64_SOURCE/g' feeds/packages/utils/xfsprogs/Makefile
 
+# 修复 vim-fuller 单独勾选时打包失败：
+#   cp: cannot stat '.../vim82/ipkg-install/usr/share/vim/vim82': No such file or directory
+# 原因：上游 Makefile 只在选 vim-runtime / vim-help 时才执行 installrtbase 生成该目录，
+#       而只勾 vim-fuller 时它的 install 又要复制这个目录 -> 把 vim-fuller 也纳入条件即可
+sed -i 's|ifneq ($(CONFIG_PACKAGE_vim-runtime)$(CONFIG_PACKAGE_vim-help),)|ifneq ($(CONFIG_PACKAGE_vim-runtime)$(CONFIG_PACKAGE_vim-help)$(CONFIG_PACKAGE_vim-fuller),)|' feeds/packages/utils/vim/Makefile
+
 # 修改 Makefile
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
