@@ -158,6 +158,13 @@ sed -i 's/TARGET_CFLAGS.*/TARGET_CFLAGS += -DHAVE_MAP_SYNC -D_LARGEFILE64_SOURCE
 #       而只勾 vim-fuller 时它的 install 又要复制这个目录 -> 把 vim-fuller 也纳入条件即可
 sed -i 's|ifneq ($(CONFIG_PACKAGE_vim-runtime)$(CONFIG_PACKAGE_vim-help),)|ifneq ($(CONFIG_PACKAGE_vim-runtime)$(CONFIG_PACKAGE_vim-help)$(CONFIG_PACKAGE_vim-fuller),)|' feeds/packages/utils/vim/Makefile
 
+# 修复 netspeedtest 打包失败：它的 LUCI_DEPENDS 里写着 +python3-pkg-resources，
+# 但该包在 Lean 当前 feed 已不存在（日志警告 10 次），导致 luci-app-netspeedtest 没有可安装候选，
+# 连带 luci-i18n-netspeedtest-zh-cn 一起失败：
+#   * opkg_install_cmd: Cannot install package luci-app-netspeedtest.
+# 该仓库里已无任何 .py 文件、也不引用 pkg_resources，属历史遗留废依赖，直接去掉
+sed -i 's|+python3-pkg-resources ||' package/netspeedtest/luci-app-netspeedtest/Makefile
+
 # 修改 Makefile
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
