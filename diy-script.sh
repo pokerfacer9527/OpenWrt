@@ -165,6 +165,13 @@ sed -i 's|ifneq ($(CONFIG_PACKAGE_vim-runtime)$(CONFIG_PACKAGE_vim-help),)|ifneq
 # 该仓库里已无任何 .py 文件、也不引用 pkg_resources，属历史遗留废依赖，直接去掉
 sed -i 's|+python3-pkg-resources ||' package/netspeedtest/luci-app-netspeedtest/Makefile
 
+# 修复 rust [host] 编译失败（Lean 上游 2026-10 引入的 bug）：
+#   Cannot find appropriate hash command, ensure the provided hash is either a MD5 or SHA256 checksum.
+#   make[3]: *** [.../dl/rustc-1.99.1-src.tar.xz] Error 255
+# 原因：上游把 PKG_HASH 写成 "sha256:<64位>"，长度 71；而 OpenWrt scripts/download.pl 的 hash_cmd()
+#       只按长度判断类型（64=sha256、32=md5），71 字符直接 die。去掉前缀即可。
+sed -i 's|^PKG_HASH:=sha256:|PKG_HASH:=|' feeds/packages/lang/rust/Makefile
+
 # 修改 Makefile
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
 find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
