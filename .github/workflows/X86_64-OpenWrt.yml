@@ -8,8 +8,6 @@ on:
       - 'configs/**'
       - 'diy-script.sh'
       - '.github/workflows/X86_64-OpenWrt.yml'
-  schedule:
-    - cron: '0 19 * * 0'
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
